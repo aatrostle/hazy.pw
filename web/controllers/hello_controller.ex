@@ -10,4 +10,11 @@ defmodule HelloPhoenix.HelloController do
     render conn, "index.html"
   end
 
+  # NOTE pattern match agains params, binding param to messenger variable
+  # Could also pass rest of params like `%{"messenger" => messenger} = params`
+  def show(conn, %{"messenger" => messenger}) do
+    # NOTE pass messenger value as param to view/template
+    render conn, "show.html", messenger: messenger
+  end
+
 end
