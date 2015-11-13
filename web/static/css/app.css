@@ -65,6 +65,14 @@ form.link, form.button {
 .messages {
   height: 150px;
   overflow-y: scroll;
+  border: 1px solid #ccc;
+  margin-bottom: 35px;
+}
+
+.chat-input {
+  width: 100%;
+  font-size: 16px;
+  padding: 2px;
 }
 
 /* Responsive: Portrait tablets and up */
