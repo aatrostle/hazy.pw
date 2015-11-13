@@ -22,3 +22,13 @@ erl_crash.dump
 # secrets file as long as you replace its contents by environment
 # variables.
 /config/prod.secret.exs
+
+# Don't commit your conf file (and schema file?)
+config/hello_phoenix.conf
+config/hello_phoenix.schema.exs
+
+# For now we'll ignore releases
+/rel/
+
+# For now we'll ignore environment .save file, not sure why it was generated
+config/prod.exs.save
