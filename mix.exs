@@ -3,7 +3,7 @@ defmodule HelloPhoenix.Mixfile do
 
   def project do
     [app: :hello_phoenix,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
