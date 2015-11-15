@@ -1,6 +1,3 @@
-// NOTE: The contents of this file will only be executed if
-// you uncomment its entry in "web/static/js/app.js".
-
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "deps/phoenix/web/static/js/phoenix"
@@ -53,20 +50,25 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 socket.connect()
 
-// Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("rooms:lobby", {})
+let usernameInput = $('#username-input')
 let chatInput = $('#chat-input')
 let messagesContainer = $("#messages")
 
 chatInput.on("keypress", event => {
   if(event.keyCode === 13){
-    channel.push("new_msg", { body: chatInput.val() })
-    chatInput.val("")
+    if(usernameInput.val().length > 1){
+      channel.push("new_msg", { username: usernameInput.val(), body: chatInput.val() })
+      chatInput.val("")
+      usernameInput.css('border-color', 'inherit').css('color', '#ccc')
+    } else {
+      usernameInput.css('border-color', 'red').css('color', '#ccc')
+    }
   }
 })
 
 channel.on("new_msg", payload => {
-  messagesContainer.append(`<br/>[${Date()}] ${payload.body}`)
+  messagesContainer.append(`<span class="timestamp">${new Date().toLocaleTimeString().toString()}</span> [${payload.username}] ${payload.body}<br/>`)
   var messagesContainerScrollHeight = messagesContainer[0].scrollHeight
   messagesContainer.scrollTop(messagesContainerScrollHeight)
 })

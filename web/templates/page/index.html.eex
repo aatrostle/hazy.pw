@@ -4,4 +4,6 @@
 
 <div id="messages" class="messages"></div>
 
+<input id="username-input" class="username-input" placeholder="u/n" type="text"></input>
+
 <input id="chat-input" class="chat-input" placeholder="say somethin" type="text"></input>

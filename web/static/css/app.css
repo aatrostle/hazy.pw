@@ -61,6 +61,11 @@ form.link, form.button {
   margin: 35px 0;
 }
 
+.timestamp {
+  color: #ccc;
+  font-style: italic;
+}
+
 /* Messages display container*/
 .messages {
   height: 150px;
@@ -69,10 +74,17 @@ form.link, form.button {
   margin-bottom: 35px;
 }
 
-.chat-input {
-  width: 100%;
+.username-input {
+  width: 10%;
   font-size: 16px;
   padding: 2px;
+}
+
+.chat-input {
+  width: 85%;
+  font-size: 16px;
+  padding: 2px;
+  float: right;
 }
 
 /* Responsive: Portrait tablets and up */

@@ -1,6 +1,9 @@
 defmodule HelloPhoenix.RoomChannel do
   use Phoenix.Channel
 
+  alias HelloPhoenix.Repo
+  alias HelloPhoenix.Message
+
   def join("rooms:lobby", _message, socket) do
     {:ok, socket}
   end
@@ -9,8 +12,15 @@ defmodule HelloPhoenix.RoomChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("new_msg", %{"body" => body}, socket) do
-    broadcast! socket, "new_msg", %{body: body}
+  def handle_in("new_msg", %{"username" => username, "body" => body}, socket) do
+    params = %{username: username, body: body}
+    changeset = Message.changeset(%Message{}, params)
+
+    if changeset.valid? do
+      Repo.insert(changeset)
+    end
+
+    broadcast! socket, "new_msg", params
     {:noreply, socket}
   end
 
