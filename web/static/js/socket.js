@@ -62,7 +62,7 @@ chatInput.on("keypress", event => {
       chatInput.val("")
       usernameInput.css('border-color', 'inherit').css('color', '#ccc')
     } else {
-      usernameInput.css('border-color', 'red').css('color', '#ccc')
+      usernameInput.css('border-color', 'red').css('color', 'inherit')
     }
   }
 })
