@@ -1,4 +1,5 @@
 %{"bbmustache": {:hex, :bbmustache, "1.0.3"},
+  "certifi": {:hex, :certifi, "0.1.1"},
   "conform": {:hex, :conform, "0.17.0"},
   "cowboy": {:hex, :cowboy, "1.0.3"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
@@ -8,7 +9,13 @@
   "exrm": {:hex, :exrm, "0.19.9"},
   "fs": {:hex, :fs, "0.9.2"},
   "getopt": {:hex, :getopt, "0.8.2"},
+  "hackney": {:hex, :hackney, "1.4.4"},
+  "httpoison": {:hex, :httpoison, "0.8.0"},
+  "idna": {:hex, :idna, "1.0.2"},
+  "mimerl": {:hex, :mimerl, "1.0.0"},
+  "mimetype_parser": {:hex, :mimetype_parser, "0.1.0"},
   "neotoma": {:hex, :neotoma, "1.7.3"},
+  "oauth2": {:hex, :oauth2, "0.5.0"},
   "phoenix": {:hex, :phoenix, "1.0.3"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "1.2.0"},
   "phoenix_html": {:hex, :phoenix_html, "2.2.0"},
@@ -19,4 +26,5 @@
   "postgrex": {:hex, :postgrex, "0.9.1"},
   "providers": {:hex, :providers, "1.4.1"},
   "ranch": {:hex, :ranch, "1.1.0"},
-  "relx": {:hex, :relx, "3.5.0"}}
+  "relx": {:hex, :relx, "3.5.0"},
+  "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}
