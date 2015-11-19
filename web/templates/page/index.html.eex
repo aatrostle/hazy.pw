@@ -7,3 +7,5 @@
 <input id="username-input" class="username-input" placeholder="u/n" type="text"></input>
 
 <input id="chat-input" class="chat-input" placeholder="say somethin" type="text"></input>
+
+<a href="/auth">connect soundcloud</a>

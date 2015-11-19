@@ -19,6 +19,9 @@ defmodule HelloPhoenix.Router do
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+
+    get "/auth", AuthController, :auth
+    get "/auth/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.

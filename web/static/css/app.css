@@ -78,6 +78,7 @@ form.link, form.button {
   width: 10%;
   font-size: 16px;
   padding: 2px;
+  margin-bottom: 35px;
 }
 
 .chat-input {

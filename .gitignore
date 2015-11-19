@@ -32,3 +32,6 @@ config/hello_phoenix.schema.exs
 
 # For now we'll ignore environment .save file, not sure why it was generated
 config/prod.exs.save
+
+# Our env variables, get these from the project owner
+.env
