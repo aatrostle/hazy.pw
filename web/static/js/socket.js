@@ -1,6 +1,7 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
-import {Socket} from "deps/phoenix/web/static/js/phoenix"
+// TODO figure out why I have to do this..
+import {Socket} from "../../../deps/phoenix/web/static/js/phoenix"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 

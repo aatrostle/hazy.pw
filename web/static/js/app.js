@@ -11,7 +11,8 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "deps/phoenix_html/web/static/js/phoenix_html"
+// TODO figure out why I have to do this..
+import "../../../deps/phoenix_html/web/static/js/phoenix_html"
 
 // Import local files
 //
@@ -19,3 +20,12 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+import React from "react"
+import ReactDOM from "react-dom"
+
+import HelloWorld from "./helloworld"
+
+ReactDOM.render(
+  <HelloWorld />,
+  document.getElementById('main')
+);

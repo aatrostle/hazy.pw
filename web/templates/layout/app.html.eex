@@ -13,6 +13,9 @@
 
   <body>
     <div class="container" role="main">
+      <div id="main">
+      </div>
+
       <div class="header">
         <!-- <ul class="nav nav-pills pull-right">
           <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
@@ -27,6 +30,10 @@
 
     </div> <!-- /container -->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <%= if Mix.env == :dev do %>
+      <script src='http://localhost:4001/app.js'></script>
+    <% else %>
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <% end %>
   </body>
 </html>
