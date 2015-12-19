@@ -17,10 +17,9 @@ if (prod) {
 }
 
 module.exports = {
-  devtool: prod ? null : 'eval-sourcemaps',
-
+  devtool: prod ? null : 'eval-source-map',
   entry: prod ? entry : [
-    'webpack-dev-server/client?' + publicPath,
+    `webpack-dev-server/client?${publicPath}`,
     'webpack/hot/only-dev-server',
     entry
   ],
@@ -35,7 +34,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader'],
+        loaders: loaders,
       }
     ]
   }
