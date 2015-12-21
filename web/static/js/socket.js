@@ -3,6 +3,8 @@
 // TODO figure out why I have to do this..
 import {Socket} from "../../../deps/phoenix/web/static/js/phoenix"
 
+import MessageActions from './message_actions'
+
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 // When you connect, you'll often need to authenticate the client.
@@ -49,69 +51,22 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+socket.connect();
 
-let channel = socket.channel("rooms:lobby", {})
-// let usernameInput = $('#username-input')
-// let chatInput = $('#chat-input')
-// let messagesContainer = $("#messages")
-//
-// chatInput.on("keypress", event => {
-//   if(event.keyCode === 13){
-//     if(usernameInput.val().length > 1){
-//       channel.push("new_msg", { username: usernameInput.val(), body: chatInput.val() })
-//       chatInput.val("")
-//       usernameInput.css('border-color', 'inherit').css('color', '#ccc')
-//     } else {
-//       usernameInput.css('border-color', 'red').css('color', 'inherit')
-//     }
-//   }
-// })
-//
-// channel.on("new_msg", payload => {
-//   messagesContainer.append(`<span class="timestamp">${new Date().toLocaleTimeString().toString()}</span> [${payload.username}] ${payload.body}<br/>`)
-//   var messagesContainerScrollHeight = messagesContainer[0].scrollHeight
-//   messagesContainer.scrollTop(messagesContainerScrollHeight)
-// })
-//
-// channel.join()
-//   .receive("ok", resp => { console.log("Joined successfully", resp) })
-//   .receive("error", resp => { console.log("Unable to join", resp) })
+let channel = socket.channel("rooms:lobby", {});
 
-
-import React from "react"
-import ReactDOM from "react-dom"
-
-import BasicChatComponent from "./basic_chat_component"
-
-
-let MESSAGES = [
-  { id: 1, username: "snarl", body: "The quick brown fox jumps over the lazy dog" }
-  ,{ id: 2, username: "tom", body: "The quick brown fox jumps over the lazy dog" }
-  ,{ id: 3, username: "snarl", body: "The quick brown fox jumps over the lazy dog" }
-  ,{ id: 4, username: "snarl", body: "The quick brown fox jumps over the lazy dog" }
-  ,{ id: 5, username: "tom", body: "The quick brown fox jumps over the lazy dog" }
-  ,{ id: 6, username: "mike", body: "The quick brown fox jumps over the lazy dog" }
-]
-
-channel.on("new_msg", payload => {
-  // messagesContainer.append(`<span class="timestamp">${new Date().toLocaleTimeString().toString()}</span> [${payload.username}] ${payload.body}<br/>`)
-  // var messagesContainerScrollHeight = messagesContainer[0].scrollHeight
-  // messagesContainer.scrollTop(messagesContainerScrollHeight)
-  MESSAGES.push({ id: 7, username: "dickfoot", body: "durp!" })
-
-
+channel.on("new_msg", function(payload) {
+  MessageActions.addMessage(payload.body)
 })
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ok", function(resp) {
+     console.log("Joined successfully", resp);
+     MessageActions.addMessage("Joined successfully");
+   })
+  .receive("error", function(resp) {
+    console.log("Unable to join", resp);
+    MessageActions.addMessage("Unable to join");
+  })
 
-ReactDOM.render(
-  <BasicChatComponent messages={MESSAGES} />,
-  document.getElementById('main')
-);
-
-
-
-export default socket
+export default channel

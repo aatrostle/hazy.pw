@@ -1,8 +1,11 @@
 import React from "react"
 import MessageComponent from "./message_component"
 
-module.exports = React.createClass({
-  render: function() {
+let MessageList = React.createClass({
+  // var messagesContainerScrollHeight = messagesContainer[0].scrollHeight
+  // messagesContainer.scrollTop(messagesContainerScrollHeight)
+
+  render() {
     var rows = []
     this.props.messages.forEach(function(message) {
       rows.push(<MessageComponent key={message.id} message={message} />)
@@ -15,3 +18,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default MessageList;
