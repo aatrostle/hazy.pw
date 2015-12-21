@@ -13,12 +13,12 @@ let MESSAGES = [
 let messageStore = Reflux.createStore({
   listenables: MessageActions,
 
-  onAddMessage(label) {
+  onAddMessage(username, body) {
     let clone = MESSAGES.slice(0) // NOTE lets get immutable data in here soon
     let nextId = clone.reverse()[0].id + 1;
 
     // NOTE add the new message
-    MESSAGES.push({timestamp: Date.now(), id: nextId, username: "UNKNOWN", body: label})
+    MESSAGES.push({timestamp: Date.now(), id: nextId, username: username, body: body})
 
     // NOTE this triggers a re-render, because this triggers the store to notify its subscribers
     this.trigger(MESSAGES);

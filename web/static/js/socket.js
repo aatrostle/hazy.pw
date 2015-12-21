@@ -56,17 +56,17 @@ socket.connect();
 let channel = socket.channel("rooms:lobby", {});
 
 channel.on("new_msg", function(payload) {
-  MessageActions.addMessage(payload.body)
+  MessageActions.addMessage(payload.username, payload.body)
 })
 
 channel.join()
   .receive("ok", function(resp) {
      console.log("Joined successfully", resp);
-     MessageActions.addMessage("Joined successfully");
+     MessageActions.addMessage("USER", "Joined successfully");
    })
   .receive("error", function(resp) {
     console.log("Unable to join", resp);
-    MessageActions.addMessage("Unable to join");
+    MessageActions.addMessage("USER", "Unable to join");
   })
 
 export default channel
