@@ -9,7 +9,7 @@ let Message = React.createClass({
   render() {
     return (
       <div className="message-component">
-        <div><span>{this.dateHelper()}</span> [{this.props.message.username}] {this.props.message.body}</div>
+        <div><span className="timestamp">{this.dateHelper()}</span> [{this.props.message.username}] {this.props.message.body}</div>
       </div>
     );
   }

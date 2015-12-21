@@ -6,10 +6,8 @@ let UsernameInput = React.createClass({
   },
   render() {
     return (
-      <div>
-        <input type="text" ref="usernameTextInput" placeholder="u/n"
-          onChange={this.handleChange} value={this.props.usernameText} />
-      </div>
+      <input type="text" className="username-input" ref="usernameTextInput" placeholder="u/n"
+        onChange={this.handleChange} value={this.props.usernameText} />
     )
   }
 });

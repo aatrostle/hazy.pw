@@ -13,10 +13,8 @@ let MessageInput = React.createClass({
   },
   render() {
     return (
-      <div>
-        <input type="text" ref="messageTextInput" placeholder="Send something..."
-          onKeyUp={this.handleKeyUp} onChange={this.handleChange} value={this.props.messageText} />
-      </div>
+      <input type="text" className="chat-input" ref="messageTextInput" placeholder="Send something..."
+        onKeyUp={this.handleKeyUp} onChange={this.handleChange} value={this.props.messageText} />
     )
   }
 });

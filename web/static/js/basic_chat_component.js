@@ -1,3 +1,4 @@
+import '../css/app.css'
 import React from "react"
 import Reflux from 'reflux'
 import MessageListComponent from './message_list_component'
