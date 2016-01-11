@@ -1,10 +1,7 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
-import {Socket} from "deps/phoenix/web/static/js/phoenix"
-
-let socket = new Socket("/socket", {params: {token: window.userToken}})
-
 // When you connect, you'll often need to authenticate the client.
+
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
 // If the current user exists you can assign the user's token in
@@ -48,33 +45,26 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+// NOTE move this dependency to webpack config via resolve option
+import {Socket} from "../../../deps/phoenix/web/static/js/phoenix"
 
-let channel = socket.channel("rooms:lobby", {})
-let usernameInput = $('#username-input')
-let chatInput = $('#chat-input')
-let messagesContainer = $("#messages")
+export default function configureChannel() {
+  let socket = new Socket("/socket", {params: {token: window.userToken}})
+  socket.connect();
 
-chatInput.on("keypress", event => {
-  if(event.keyCode === 13){
-    if(usernameInput.val().length > 1){
-      channel.push("new_msg", { username: usernameInput.val(), body: chatInput.val() })
-      chatInput.val("")
-      usernameInput.css('border-color', 'inherit').css('color', '#ccc')
-    } else {
-      usernameInput.css('border-color', 'red').css('color', 'inherit')
-    }
-  }
-})
+  let channel = socket.channel("rooms:lobby", {});
 
-channel.on("new_msg", payload => {
-  messagesContainer.append(`<span class="timestamp">${new Date().toLocaleTimeString().toString()}</span> [${payload.username}] ${payload.body}<br/>`)
-  var messagesContainerScrollHeight = messagesContainer[0].scrollHeight
-  messagesContainer.scrollTop(messagesContainerScrollHeight)
-})
+  // channel.on("new_msg", function(payload) {
+  //   console.log("new_msg", payload);
+  // })
 
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  channel.join()
+    .receive("ok", function(resp) {
+      console.log("Joined successfully", resp);
+    })
+    .receive("error", function(resp) {
+      console.log("Unable to join", resp);
+    })
 
-export default socket
+  return channel
+}

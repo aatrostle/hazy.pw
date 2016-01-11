@@ -1,21 +1,24 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
+// TODO figure out why I have to do this.. or if I even have to
+import "../../../deps/phoenix_html/web/static/js/phoenix_html"
 
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-import "deps/phoenix_html/web/static/js/phoenix_html"
+import React from "react"
+import ReactDOM from "react-dom"
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
 
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+import BasicChatComponent from "./basic_chat_component"
 
-import socket from "./socket"
+import chatApp from './reducers' // NOTE root reducer, gets index
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+let store = createStoreWithMiddleware(chatApp)
+
+let rootElement = document.getElementById('main')
+
+// NOTE eventually will render main app component
+ReactDOM.render(
+  <Provider store={store}>
+    <BasicChatComponent />
+  </Provider>,
+  rootElement
+);
