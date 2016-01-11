@@ -1,17 +1,15 @@
 import '../css/app.css'
 import React from "react"
-import Reflux from 'reflux'
+import { connect } from 'react-redux'
+import { addMessage } from './actions/messages'
+
 import MessageListComponent from './message_list_component'
 import UsernameInputComponent from './username_input_component'
 import MessageInputComponent from './message_input_component'
 
-import MessageActions from './message_actions'
-import channel from "./socket"
-
-import MessageStore from './message_store'
+// import channel from "./socket"
 
 let BasicChatComponent = React.createClass({
-  mixins: [Reflux.connect(MessageStore, "messages")],
   getInitialState() {
     return {
         messageText: '',
@@ -20,7 +18,9 @@ let BasicChatComponent = React.createClass({
   },
   handleMessageSubmit() {
     if (this.state.usernameText !== "" && this.state.messageText !== "") {
-      channel.push("new_msg", {username: this.state.usernameText, body: this.state.messageText});
+      this.props.dispatch(addMessage(this.state.usernameText, this.state.messageText))
+      // NOTE this should be handled somewhere else
+      // channel.push("new_msg", {username: this.state.usernameText, body: this.state.messageText});
       this.state.messageText = "";
     }
   },
@@ -35,10 +35,11 @@ let BasicChatComponent = React.createClass({
     });
   },
   render() {
+    const { dispatch, messages } = this.props
     return (
       <div className="basic-chat-component">
         <h1>hazy.pw</h1>
-        <MessageListComponent messages={this.state.messages} />
+        <MessageListComponent messages={messages} />
         <UsernameInputComponent usernameText={this.state.usernameText} onUserInput={this.handleUsernameInput} />
         <MessageInputComponent messageText={this.state.messageText} onUserInput={this.handleMessageInput} onUserSubmit={this.handleMessageSubmit} />
       </div>
@@ -46,4 +47,11 @@ let BasicChatComponent = React.createClass({
   }
 });
 
-export default BasicChatComponent;
+// NOTE using this bit from the redux documentation
+function select(state) {
+  return {
+    messages: state.messages
+  }
+}
+
+export default connect(select)(BasicChatComponent);
