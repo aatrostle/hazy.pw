@@ -1,13 +1,7 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
-// TODO figure out why I have to do this..
-import {Socket} from "../../../deps/phoenix/web/static/js/phoenix"
-
-import MessageActions from './message_actions'
-
-let socket = new Socket("/socket", {params: {token: window.userToken}})
-
 // When you connect, you'll often need to authenticate the client.
+
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
 // If the current user exists you can assign the user's token in
@@ -51,22 +45,26 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect();
+// NOTE move this dependency to webpack config via resolve option
+import {Socket} from "../../../deps/phoenix/web/static/js/phoenix"
 
-let channel = socket.channel("rooms:lobby", {});
+export default function configureChannel() {
+  let socket = new Socket("/socket", {params: {token: window.userToken}})
+  socket.connect();
 
-channel.on("new_msg", function(payload) {
-  MessageActions.addMessage(payload.username, payload.body)
-})
+  let channel = socket.channel("rooms:lobby", {});
 
-channel.join()
-  .receive("ok", function(resp) {
-     console.log("Joined successfully", resp);
-     MessageActions.addMessage("USER", "Joined successfully");
-   })
-  .receive("error", function(resp) {
-    console.log("Unable to join", resp);
-    MessageActions.addMessage("USER", "Unable to join");
+  channel.on("new_msg", function(payload) {
+    console.log("new_msg", payload);
   })
 
-export default channel
+  channel.join()
+    .receive("ok", function(resp) {
+      console.log("Joined successfully", resp);
+    })
+    .receive("error", function(resp) {
+      console.log("Unable to join", resp);
+    })
+
+  return channel
+}

@@ -7,8 +7,6 @@ import MessageListComponent from './message_list_component'
 import UsernameInputComponent from './username_input_component'
 import MessageInputComponent from './message_input_component'
 
-// import channel from "./socket"
-
 let BasicChatComponent = React.createClass({
   getInitialState() {
     return {
@@ -19,8 +17,6 @@ let BasicChatComponent = React.createClass({
   handleMessageSubmit() {
     if (this.state.usernameText !== "" && this.state.messageText !== "") {
       this.props.dispatch(addMessage(this.state.usernameText, this.state.messageText))
-      // NOTE this should be handled somewhere else
-      // channel.push("new_msg", {username: this.state.usernameText, body: this.state.messageText});
       this.state.messageText = "";
     }
   },

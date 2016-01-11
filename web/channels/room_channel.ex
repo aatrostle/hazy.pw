@@ -21,7 +21,7 @@ defmodule HelloPhoenix.RoomChannel do
     end
 
     broadcast! socket, "new_msg", params
-    {:noreply, socket}
+    {:reply, :ok, socket}
   end
 
   def handle_out("new_msg", payload, socket) do
