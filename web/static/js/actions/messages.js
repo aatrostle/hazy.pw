@@ -12,7 +12,7 @@ export function addMessage(username, body) {
 
     channel.push("new_msg", { username: username, body: body })
       .receive("ok", (response) => {
-        console.log("created message", response);
+        // console.log("created message", response);
 
         dispatch({ type: types.ADD_MESSAGE, username, body })
       })

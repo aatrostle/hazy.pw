@@ -12,7 +12,7 @@ config :hello_phoenix, HelloPhoenix.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
-  watchers: [{Path.expand("webpack.devserver.js"), []}]
+  watchers: [{Path.expand("webpack.devserver.js"), []}] # NOTE could pass options in the array
 
 # Watch static and templates for browser reloading.
 config :hello_phoenix, HelloPhoenix.Endpoint,

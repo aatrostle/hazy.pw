@@ -54,9 +54,9 @@ export default function configureChannel() {
 
   let channel = socket.channel("rooms:lobby", {});
 
-  channel.on("new_msg", function(payload) {
-    console.log("new_msg", payload);
-  })
+  // channel.on("new_msg", function(payload) {
+  //   console.log("new_msg", payload);
+  // })
 
   channel.join()
     .receive("ok", function(resp) {
